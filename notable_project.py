@@ -77,10 +77,10 @@ def create_new_appointment_for_doctor(doctor_id):
 	doctor = get_doctor_by_id(doctor_id)
 	global total_appointments
 	appt_id = total_appointments 
-	patient_name = request.form.get('patient_name')
-	kind = request.form.get('kind')
-	date = request.form.get('date')
-	time = request.form.get('time')
+	patient_name = request.json.get('patient_name')
+	kind = request.json.get('kind')
+	date = request.json.get('date')
+	time = request.json.get('time')
 	print(patient_name, kind, date, time)
 
 	# Check that time is in 15 min intervals 
@@ -103,6 +103,21 @@ def create_new_appointment_for_doctor(doctor_id):
 		return jsonify(new_appt), 201
 	else: 
 		return jsonify({'error': 'Doctor is overbooked at this time'}), 400
+
+
+@app.route('/doctors/<int:doctor_id>/appointments/<int:appt_id>', methods=['DELETE'])
+def delete_appt(doctor_id, appt_id): 
+	doctor = get_doctor_by_id(doctor_id)
+	index_to_del = -1
+	for index, appt in enumerate(doctor['appointments']): 
+		if appt['appt_id'] == appt_id: 
+			index_to_del = index 
+			break
+	if index_to_del == -1:
+		return jsonify({'error': 'Cannot delete non-existent appointment'}), 400
+	deleted_appt = doctor['appointments'].pop(index_to_del)
+	return jsonify(deleted_appt), 200
+
 
 if __name__ == '__main__':
     app.run(debug=True)
