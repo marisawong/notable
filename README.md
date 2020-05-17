@@ -20,12 +20,6 @@ Note: please have `flask run` command running in a separate terminal tab. Open u
 
 **Get a list of all appointments for a particular doctor and particular day**
 
-`curl http://127.0.0.1:5000/doctors/<DOCTOR_ID>/appointments`
-
-Example: `curl http://127.0.0.1:5000/doctors/1/appointments`
-
-**Optional query parameter to look for appointments on a particular day**
-
 `curl http://127.0.0.1:5000/doctors/<DOCTOR_ID>/appointments?date=<YYYY-MM-DD>`
 
 Example: `curl http://127.0.0.1:5000/doctors/1/appointments?date=2020-01-01`
