@@ -8,7 +8,8 @@
 
 # Starting up the server
 1. cd into notable project 
-2. `flask run` 
+2. `export FLASK_APP=notable_project.py`
+3. `flask run` 
 
 # Example Usage
 Note: please have `flask run` command running in a separate terminal tab. Open up a new terminal tab and run the following: 
